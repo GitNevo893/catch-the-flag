@@ -1,5 +1,7 @@
 #מגישים- נבו ברוך וברק ברמן
 import pygame
+import screen
+import consts
 
 state = {
     "is_window_open": True,
@@ -7,9 +9,7 @@ state = {
 }
 
 def main():
-
-    #TODO
-    pass
+    pygame.init()
 
 
 def handle_user_events():
