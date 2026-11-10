@@ -1,3 +1,4 @@
+#מגישים- נבו ברוך וברק ברמן
 import pygame
 
 state = {
