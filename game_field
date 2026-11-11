@@ -149,3 +149,36 @@ def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה
                 screen.screen_display.blit(screen.create_soldier(consts.SOLDIER_IMG), (soldier_x, soldier_y))
             else:
                 continue
+
+#===========================================================================
+#mini game
+def print_test_grid(mtrx):
+    for i in mtrx:
+        print('\t'.join(map(str, i)))
+
+create()
+print_test_grid(field_grid)
+while True:
+    print(' \nenter- RIGHT/LEFT/UP/DOWN')
+    action = input('>>> ')
+    if action == 'RIGHT':
+        upper_crdts , lower_crdts = soldier.get_soldier_crdts(field_grid)
+        for dc , cr in upper_crdts:
+            field_grid[dc][cr] = consts.EMPTY_CELL
+            field_grid[dc][cr + 1] = consts.SOLDIER_UPPER
+        for dc , cr in lower_crdts:
+            field_grid[dc][cr] = consts.EMPTY_CELL
+            field_grid[dc][cr + 1] = consts.SOLDIER_UPPER
+        #להוסיף בדיקת גבולות
+    elif action == 'LEFT':
+        ...
+        #להוסיף בדיקת גבולות
+    elif action == 'UP':
+        ...
+        #להוסיף בדיקת גבולות
+    elif action == 'DOWN':
+        ...
+        #להוסיף בדיקת גבולות
+    elif action == 'STOP':
+        break
+    print_test_grid(field_grid)
