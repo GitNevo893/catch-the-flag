@@ -2,17 +2,7 @@ import consts
 import random
 import screen
 
-
-# יצירת הגריד המרכזי שלנו
-def create_field_grid():
-    field_grid_to_return = []
-    field_grid_to_return = create_empty_grd()
-    place_flag(field_grid)
-    place_mines(field_grid)
-    return field_grid_to_return
-
-
-field_grid = create_field_grid()
+field_grid = []
 
 
 # פונקציה ליצירת גריד ריק
@@ -83,6 +73,15 @@ def place_mines(board):
             mines_positions.append((mine_row, mine_col))
     return mines_positions
 
+#יצירת הגריד המרכזי שלנו
+def apply_to_field_grid(mtrx):
+    field_grid_to_return = []
+    field_grid_to_return = create_empty_grd()
+    place_flag(field_grid_to_return)
+    place_mines(field_grid_to_return)
+    return field_grid_to_return
+
+field_grid = apply_to_field_grid(field_grid)
 
 def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה צריך לצייר ואיפה, עם התנאים המתאימים.
     # flag_objects = get_flag_cells()
