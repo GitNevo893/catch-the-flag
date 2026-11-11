@@ -15,3 +15,18 @@ SOLDIER_FEET_ROWS = 1 # the lower part
 #לדגל
 FLAG_ROWS = 3
 FLAG_COLS = 4
+
+#לבדיקת המשך/ניצחון/הפסד
+RUNNING_STATE = 1
+LOSE_STATE = 2
+WIN_STATE = 3
+
+# לגריד
+EMPTY_CELL = '_'
+MINE_CELL = 'X'
+FLAG_CELL = 'F'
+
+# למוקשים
+MINES_COUNT = 20
+MINE_ROWS = 1
+MINE_COLS = 3
