@@ -87,38 +87,73 @@ def get_soldier_position():
 
 #פונקציה שתחזיר את הקורדינטות בהם פלג גוף העליון והתחתון של החייל צריכות להיות
 def get_soldier_cells():
-    soldier_upper_cells_crdts = []
-    soldier_lower_cells_crdts = []
-    starter_row , starter_col = get_soldier_position()
+    upper_cells = []
+    lower_cells = []
+    soldier_row, soldier_col = get_soldier_position()
+    # משבצות הגוף
+    for row in range(soldier_row , soldier_row + consts.SOLDIER_BODY_ROWS):
+        for col in range(soldier_col , soldier_col + consts.SOLDIER_COLS):
+            upper_cells.append((row, col))
+    # משבצות הרגליים
+    feet_row = soldier_row + consts.SOLDIER_BODY_ROWS
+    for col in range(soldier_col , soldier_col + consts.SOLDIER_COLS):
+        lower_cells.append((feet_row, col))
 
-    for r in range(0 , consts.BOARD_ROWS - 1):
-        for c in range(0 , consts.BOARD_COLS - 1):
-            #פלג גוף עליון
-            if r == starter_row and c == starter_col:
-                go_down = 0
-                for i in range(consts.SOLDIER_BODY_ROWS):
-                    go_right = 0
-                    for j in range(consts.SOLDIER_COLS):
-                        soldier_upper_cells_crdts.append((r + go_down , c + go_right))
-                        go_right += 1
-                    go_down += 1
-            #פלג גוף תחתון
-            if r == starter_row - 1 + consts.SOLDIER_ROWS and c == starter_col:
-                go_right = 0
-                for p in range(consts.SOLDIER_COLS):
-                    soldier_lower_cells_crdts.append((r , c + go_right))
-                    go_right += 1
-
-    return soldier_upper_cells_crdts , soldier_lower_cells_crdts
+    return upper_cells, lower_cells
 
 #פונקציה שתמקם את החייל בקורדינטות המתאימות
 def place_soldier(grid):
-    upper_cells , lower_cells = get_soldier_cells()
+    upper_cells, lower_cells = get_soldier_cells()
 
-    for row , col in upper_cells:
+    for row, col in upper_cells:
         grid[row][col] = consts.SOLDIER_UPPER
-    for row , col in lower_cells:
+
+    for row, col in lower_cells:
         grid[row][col] = consts.SOLDIER_LOWER
+
+#הפונקציה המרכזית להזזת החייל
+def move_soldier(row_change, col_change):
+    soldier_row, soldier_col = get_soldier_position()
+    new_row = soldier_row + row_change
+    new_col = soldier_col + col_change
+
+    # בדיקת גבולות הלוח
+    if new_row < 0:
+        return False
+    if new_col < 0:
+        return False
+    if new_row + consts.SOLDIER_ROWS > consts.BOARD_ROWS:
+        return False
+    if new_col + consts.SOLDIER_COLS > consts.BOARD_COLS:
+        return False
+
+    # ניקוי המיקום הישן של החייל
+    upper_cells, lower_cells = get_soldier_cells()
+    for row, col in upper_cells + lower_cells:
+        field_grid[row][col] = get_original_cell(row, col)
+
+    # הצבת החייל במיקום החדש
+    for row in range(new_row , new_row + consts.SOLDIER_BODY_ROWS):
+        for col in range(new_col , new_col + consts.SOLDIER_COLS):
+            field_grid[row][col] = consts.SOLDIER_UPPER
+
+    feet_row = new_row + consts.SOLDIER_BODY_ROWS
+    for col in range(new_col , new_col + consts.SOLDIER_COLS):
+        field_grid[feet_row][col] = consts.SOLDIER_LOWER
+
+    return True
+
+#פונקציה שתזכור מה היה בתא לפני שחייל הגיע אליו
+def get_original_cell(row, col):
+    if (row, col) in get_flag_cells():
+        return consts.FLAG_CELL
+
+    for mine_row, mine_col in mines_positions:
+        if (mine_row <= row < mine_row + consts.MINE_ROWS and
+                mine_col <= col < mine_col + consts.MINE_COLS):
+            return consts.MINE_CELL
+
+    return consts.EMPTY_CELL
 
 def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה צריך לצייר ואיפה, עם התנאים המתאימים.
     flag_y = 0
@@ -144,36 +179,3 @@ def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה
                 screen.screen_display.blit(screen.create_soldier(consts.SOLDIER_IMG), (soldier_x, soldier_y))
             else:
                 continue
-
-#===========================================================================
-#mini game
-def print_test_grid(mtrx):
-    for i in mtrx:
-        print('\t'.join(map(str, i)))
-
-create()
-print_test_grid(field_grid)
-while True:
-    print(' \nenter- RIGHT/LEFT/UP/DOWN')
-    action = input('>>> ')
-    if action == 'RIGHT':
-        upper_crdts , lower_crdts = soldier.get_soldier_crdts(field_grid)
-        for dc , cr in upper_crdts:
-            field_grid[dc][cr] = consts.EMPTY_CELL
-            field_grid[dc][cr + 1] = consts.SOLDIER_UPPER
-        for dc , cr in lower_crdts:
-            field_grid[dc][cr] = consts.EMPTY_CELL
-            field_grid[dc][cr + 1] = consts.SOLDIER_UPPER
-        #להוסיף בדיקת גבולות
-    elif action == 'LEFT':
-        ...
-        #להוסיף בדיקת גבולות
-    elif action == 'UP':
-        ...
-        #להוסיף בדיקת גבולות
-    elif action == 'DOWN':
-        ...
-        #להוסיף בדיקת גבולות
-    elif action == 'STOP':
-        break
-    print_test_grid(field_grid)
