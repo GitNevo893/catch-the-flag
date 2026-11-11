@@ -1,5 +1,6 @@
 import consts
 import random
+import screen
 
 #יצירת הגריד המרכזי שלנו
 def create_field_grid():
@@ -72,3 +73,8 @@ def place_mines(board):
                 board[row][col] = consts.MINE_CELL
             mines_positions.append((mine_row, mine_col))
     return mines_positions
+
+def draw():
+for row in field_grid:
+
+
