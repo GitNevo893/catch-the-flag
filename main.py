@@ -54,24 +54,16 @@ def handle_user_events():
             show_mines()
 
 def step_right():
-
-    #TODO
-    pass
+    game_field.move_soldier(0, 1)
 
 def step_left():
-
-    #TODO
-    pass
+    game_field.move_soldier(0, -1)
 
 def step_up():
-
-    #TODO
-    pass
+    game_field.move_soldier(-1, 0)
 
 def step_down():
-
-    #TODO
-    pass
+    game_field.move_soldier(1, 0)
 
 def show_mines():
 
