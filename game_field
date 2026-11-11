@@ -75,11 +75,11 @@ def place_mines(board):
 
 #יצירת הגריד המרכזי שלנו
 def apply_to_field_grid(mtrx):
-    field_grid_to_return = []
-    field_grid_to_return = create_empty_grd()
-    place_flag(field_grid_to_return)
-    place_mines(field_grid_to_return)
-    return field_grid_to_return
+    mtrx = create_empty_grd()
+    place_flag(mtrx)
+    place_mines(mtrx)
+    soldier.place_soldier(mtrx)
+    return mtrx
 
 field_grid = apply_to_field_grid(field_grid)
 
