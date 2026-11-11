@@ -17,6 +17,7 @@ def create():
         field_grid.append(current_row)
     place_flag(field_grid)
     place_mines(field_grid)
+    place_soldier(field_grid)
 
 #מיקום הדגל יקבע לפי הקבועים הנתונים לנו
 def get_flag_position():
