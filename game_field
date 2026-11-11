@@ -87,17 +87,17 @@ def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה
     # flag_objects = get_flag_cells()
     # for row in range(0, len(field_grid) - 1):
     #     for object in range(0, len(field_grid[row]) - 1):
-    #         if field_grid[row][object] == '_':
+    #         if field_grid[row][object] == EMPTY_CELL:
     #             continue
-    #         elif field_grid[row][object] == 'X' and field_grid[row][object + 2] == 'X':
-    #             image = mine pic
-    #             screen.visual_object_implementation(image)
+    #         elif field_grid[row][object] == MINE_CELL and field_grid[row][object + 2] == MINE_CELL:
+    # #             image = mine pic
+    # #             screen.visual_object_implementation(image)
     #         elif (row, object) == flag_objects[0]:
-    #             image = flag pic
-    #             screen.visual_object_implementation(image)
-    #         elif field_grid[row][object] == 'U' and field_grid[row][object + 1] == 'U' and field_grid[row + 3][object] == 'L':
-    #             image = soldier pic
-    #             screen.visual_object_implementation(image)
+    # #            image = flag pic
+    # #            screen.visual_object_implementation(image)
+    #         elif field_grid[row][object] == SOLDIER_UPPER and field_grid[row][object + 1] == SOLDIER_UPPER and field_grid[row + 3][object] == SOLDIER_LOWER:
+    # #            image = soldier pic
+    # #            screen.visual_object_implementation(image)
     #         else:
     #             continue
     pass
