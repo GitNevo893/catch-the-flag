@@ -2,13 +2,15 @@ import consts
 import random
 import screen
 
+field_grid = create_field_grid()
+
 #יצירת הגריד המרכזי שלנו
 def create_field_grid():
-    field_grid = []
-    field_grid = create_empty_grd()
+    field_grid_to_return = []
+    field_grid_to_return = create_empty_grd()
     place_flag(field_grid)
     place_mines(field_grid)
-    return field_grid
+    return field_grid_to_return
 
 #פונקציה ליצירת גריד ריק
 def create_empty_grd():
