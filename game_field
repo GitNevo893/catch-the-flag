@@ -103,13 +103,13 @@ def get_soldier_cells():
 
 #פונקציה שתמקם את החייל בקורדינטות המתאימות
 def place_soldier(grid):
-    upper_cells, lower_cells = get_soldier_cells()
+    for row in range(consts.SOLDIER_BODY_ROWS):
+        for col in range(consts.SOLDIER_COLS):
+            grid[row][col] = consts.SOLDIER_UPPER
 
-    for row, col in upper_cells:
-        grid[row][col] = consts.SOLDIER_UPPER
-
-    for row, col in lower_cells:
-        grid[row][col] = consts.SOLDIER_LOWER
+    feet_row = consts.SOLDIER_BODY_ROWS
+    for col in range(consts.SOLDIER_COLS):
+        grid[feet_row][col] = consts.SOLDIER_LOWER
 
 #הפונקציה המרכזית להזזת החייל
 def move_soldier(row_change, col_change):
