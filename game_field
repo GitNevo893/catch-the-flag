@@ -2,7 +2,8 @@ import consts
 import random
 import screen
 
-#יצירת הגריד המרכזי שלנו
+
+# יצירת הגריד המרכזי שלנו
 def create_field_grid():
     field_grid_to_return = []
     field_grid_to_return = create_empty_grd()
@@ -10,9 +11,11 @@ def create_field_grid():
     place_mines(field_grid)
     return field_grid_to_return
 
+
 field_grid = create_field_grid()
 
-#פונקציה ליצירת גריד ריק
+
+# פונקציה ליצירת גריד ריק
 def create_empty_grd():
     grd = []
     for row in range(consts.BOARD_ROWS):
@@ -23,13 +26,15 @@ def create_empty_grd():
         grd.append(current_row)
     return grd
 
-#מיקום הדגל יקבע לפי הקבועים הנתונים לנו
+
+# מיקום הדגל יקבע לפי הקבועים הנתונים לנו
 def get_flag_position():
     flag_row = consts.BOARD_ROWS - consts.FLAG_ROWS
     flag_col = consts.BOARD_COLS - consts.FLAG_COLS
     return flag_row, flag_col
 
-#ניצור רשימה של קורדינטות שבהן צריך להיות דגל
+
+# ניצור רשימה של קורדינטות שבהן צריך להיות דגל
 def get_flag_cells():
     flag_row, flag_col = get_flag_position()
     flag_cells = []
@@ -39,20 +44,22 @@ def get_flag_cells():
 
     return flag_cells
 
-#נמקם בגריד את תאי הדגל (במקרה שלנו- 2)
+
+# נמקם בגריד את תאי הדגל (במקרה שלנו- 2)
 def place_flag(board):
     flag_cells = get_flag_cells()
     for row, col in flag_cells:
         board[row][col] = consts.FLAG_CELL
 
-#פונקציה להקמת מוקשים ראנדומלים על הגריד
+
+# פונקציה להקמת מוקשים ראנדומלים על הגריד
 def place_mines(board):
     mines_positions = []
-    #לא נסיים את הקמת המוקשים עד שלא נוודא שכל מיקומם תקינים (מקום תקין = הסבר בפונקציה)
+    # לא נסיים את הקמת המוקשים עד שלא נוודא שכל מיקומם תקינים (מקום תקין = הסבר בפונקציה)
     while len(mines_positions) < consts.MINES_COUNT:
-        mine_row = random.randint(0 , consts.BOARD_ROWS - consts.MINE_ROWS)
-        mine_col = random.randint(0 , consts.BOARD_COLS - consts.MINE_COLS)
-        mine_cells = [] #עם הקורדינטות שיכנסו לכאן (באופן ראנדומלי) על ידי הלולאה הבאה, נוכל לבדוק את תקינותם על הגריד
+        mine_row = random.randint(0, consts.BOARD_ROWS - consts.MINE_ROWS)
+        mine_col = random.randint(0, consts.BOARD_COLS - consts.MINE_COLS)
+        mine_cells = []  # עם הקורדינטות שיכנסו לכאן (באופן ראנדומלי) על ידי הלולאה הבאה, נוכל לבדוק את תקינותם על הגריד
 
         for row in range(mine_row, mine_row + consts.MINE_ROWS):
             for col in range(mine_col, mine_col + consts.MINE_COLS):
@@ -60,27 +67,38 @@ def place_mines(board):
 
         is_valid = True
         for row, col in mine_cells:
-            #בדיקה ראשונה- האם יש דגל במיקום הראנדומלי של המוקש
+            # בדיקה ראשונה- האם יש דגל במיקום הראנדומלי של המוקש
             if board[row][col] != consts.EMPTY_CELL:
                 is_valid = False
                 break
-            #בדיקה שניה- המוקש לא ימוקם במיקום ההתחלתי של החייל
+            # בדיקה שניה- המוקש לא ימוקם במיקום ההתחלתי של החייל
             if row < consts.SOLDIER_ROWS and col < consts.SOLDIER_COLS:
                 is_valid = False
                 break
-        #אם המוקש עבר את כל הבדיקות נוסיף את הנקודה השמאלית שלו לרשימת הקורדינטות מוקשים שלנו
+        # אם המוקש עבר את כל הבדיקות נוסיף את הנקודה השמאלית שלו לרשימת הקורדינטות מוקשים שלנו
         if is_valid:
             for row, col in mine_cells:
-                #וגם כבר נמקם אותו על הלוח
+                # וגם כבר נמקם אותו על הלוח
                 board[row][col] = consts.MINE_CELL
             mines_positions.append((mine_row, mine_col))
     return mines_positions
 
-def draw():
-for row in range(0, len(field_grid) - 1):
-    for object in range(0, len(row) - 1):
-        if field_grid[row][object] == '_':
-            continue
-            
 
-
+def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה צריך לצייר ואיפה, עם התנאים המתאימים.
+    # flag_objects = get_flag_cells()
+    # for row in range(0, len(field_grid) - 1):
+    #     for object in range(0, len(field_grid[row]) - 1):
+    #         if field_grid[row][object] == '_':
+    #             continue
+    #         elif field_grid[row][object] == 'X' and field_grid[row][object + 2] == 'X':
+    #             image = mine pic
+    #             screen.visual_object_implementation(image)
+    #         elif (row, object) == flag_objects[0]:
+    #             image = flag pic
+    #             screen.visual_object_implementation(image)
+    #         elif field_grid[row][object] == 'U' and field_grid[row][object + 1] == 'U' and field_grid[row + 3][object] == 'L':
+    #             image = soldier pic
+    #             screen.visual_object_implementation(image)
+    #         else:
+    #             continue
+    pass
