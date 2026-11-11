@@ -6,7 +6,7 @@ import soldier
 field_grid = []
 
 
-#פונקציה ליצירת גריד ריק
+#פונקציה ליצירת גריד
 def create():
     global field_grid
     for row in range(consts.BOARD_ROWS):
