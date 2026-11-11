@@ -2,8 +2,6 @@ import consts
 import random
 import screen
 
-field_grid = create_field_grid()
-
 #יצירת הגריד המרכזי שלנו
 def create_field_grid():
     field_grid_to_return = []
@@ -11,6 +9,8 @@ def create_field_grid():
     place_flag(field_grid)
     place_mines(field_grid)
     return field_grid_to_return
+
+field_grid = create_field_grid()
 
 #פונקציה ליצירת גריד ריק
 def create_empty_grd():
@@ -77,6 +77,10 @@ def place_mines(board):
     return mines_positions
 
 def draw():
-for row in field_grid:
+for row in range(0, len(field_grid) - 1):
+    for object in range(0, len(row) - 1):
+        if field_grid[row][object] == '_':
+            continue
+            
 
 
