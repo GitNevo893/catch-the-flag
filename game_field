@@ -4,19 +4,22 @@ import screen
 import soldier
 
 field_grid = []
-
+mines_positions = []
 
 #פונקציה ליצירת גריד
 def create():
     global field_grid
+    field_grid = []
+
     for row in range(consts.BOARD_ROWS):
         current_row = []
         for col in range(consts.BOARD_COLS):
             current_row.append(consts.EMPTY_CELL)
-
         field_grid.append(current_row)
+
     place_flag(field_grid)
-    place_mines(field_grid)
+    global mines_positions
+    mines_positions = place_mines(field_grid)
     place_soldier(field_grid)
 
 #מיקום הדגל יקבע לפי הקבועים הנתונים לנו
@@ -74,21 +77,13 @@ def place_mines(board):
 
 #פונקציה למציאת המיקום הנוכחי של החייל
 def get_soldier_position():
-    soldier_row = None
-    soldier_col = None
-    #נעבור על הגריד למציאת הU הראשון
-    for r  , row in enumerate(field_grid):
-        for c in range(len(row)):
-            if field_grid[r][c] == consts.SOLDIER_UPPER:
-                soldier_row = r
-                soldier_col = c
-            break
-    #במידה והחייל עוד לא מופיע על המסך
-    if soldier_row == None:
-        soldier_row = 0
-        soldier_col = 0
 
-    return soldier_row , soldier_col
+    for row in range(consts.BOARD_ROWS):
+        for col in range(consts.BOARD_COLS):
+            if field_grid[row][col] == consts.SOLDIER_UPPER:
+                return row, col
+
+    return 0, 0
 
 #פונקציה שתחזיר את הקורדינטות בהם פלג גוף העליון והתחתון של החייל צריכות להיות
 def get_soldier_cells():
