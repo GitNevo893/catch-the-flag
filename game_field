@@ -5,16 +5,18 @@ import soldier
 
 field_grid = []
 
+
 #פונקציה ליצירת גריד ריק
-def create_empty_grd():
-    grd = []
+def create():
+    global field_grid
     for row in range(consts.BOARD_ROWS):
         current_row = []
         for col in range(consts.BOARD_COLS):
             current_row.append(consts.EMPTY_CELL)
 
-        grd.append(current_row)
-    return grd
+        field_grid.append(current_row)
+    place_flag(field_grid)
+    place_mines(field_grid)
 
 #מיקום הדגל יקבע לפי הקבועים הנתונים לנו
 def get_flag_position():
@@ -32,13 +34,13 @@ def get_flag_cells():
 
     return flag_cells
 
-#נמקם בגריד את תאי הדגל (במקרה שלנו- 2)
+#נמקם בגריד את תאי הדגל (במקרה שלנו- F)
 def place_flag(board):
     flag_cells = get_flag_cells()
     for row , col in flag_cells:
         board[row][col] = consts.FLAG_CELL
 
-#פונקציה להקמת מוקשים רנדומלים על הגריד
+#פונקציה להקמת מוקשים ראנדומלים על הגריד
 def place_mines(board):
     mines_positions = []
     #לא נסיים את הקמת המוקשים עד שלא נוודא שכל מיקומם תקינים (מקום תקין = הסבר בפונקציה)
@@ -121,16 +123,6 @@ def place_soldier(grid):
         grid[row][col] = consts.SOLDIER_UPPER
     for row , col in lower_cells:
         grid[row][col] = consts.SOLDIER_LOWER
-
-#יצירת הגריד המרכזי שלנו
-def apply_to_field_grid(mtrx):
-    mtrx = create_empty_grd()
-    place_flag(mtrx)
-    place_mines(mtrx)
-    place_soldier(mtrx)
-    return mtrx
-
-field_grid = apply_to_field_grid(field_grid)
 
 def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה צריך לצייר ואיפה, עם התנאים המתאימים.
     flag_y = 0
