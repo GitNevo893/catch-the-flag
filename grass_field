@@ -1,1 +1,44 @@
-#מודול זה מיועד רק בשביל הלוגיקה שפורסת את השיחים בתחילת המשחק.
+import consts
+import random
+
+grass_field = []
+
+def create_grass_field():
+    global grass_field
+    for row in range(consts.BOARD_ROWS):
+        current_row = []
+        for col in range(consts.BOARD_COLS):
+            current_row.append(consts.EMPTY_CELL)
+
+        grass_field.append(current_row)
+    place_grass(grass_field)
+
+def place_grass(board):
+    grass_positions = []
+
+    while len(grass_positions) < consts.GRASS_COUNT:
+        grass_row = random.randint(0, consts.BOARD_ROWS - consts.GRASS_ROWS)
+        grass_col = random.randint(0, consts.BOARD_COLS - consts.GRASS_COLS)
+        grass_cells = []
+
+        for row in range(grass_row, grass_row + consts.GRASS_ROWS):
+            for col in range(grass_col, grass_col + consts.GRASS_COLS):
+                grass_cells.append((row, col))
+
+        is_valid = True
+        for row, col in grass_cells:
+
+            if row < consts.SOLDIER_ROWS and col < consts.SOLDIER_COLS:
+                is_valid = False
+                break
+
+        if is_valid:
+            for row, col in grass_cells:
+                board[row][col] = consts.GRASS_CELL
+            grass_positions.append((grass_row, grass_col))
+    return grass_positions
+
+
+def print_test_grid(mtrx):
+    for i in mtrx:
+        print('\t'.join(map(str, i)))
