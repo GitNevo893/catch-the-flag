@@ -130,3 +130,22 @@ def apply_to_field_grid(mtrx):
     return mtrx
 
 field_grid = apply_to_field_grid(field_grid)
+
+def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה צריך לצייר ואיפה, עם התנאים המתאימים.
+    # flag_objects = get_flag_cells()
+    # for row in range(0, len(field_grid) - 1):
+    #     for object in range(0, len(field_grid[row]) - 1):
+    #         if field_grid[row][object] == EMPTY_CELL:
+    #             continue
+    #         elif field_grid[row][object] == MINE_CELL and field_grid[row][object + 2] == MINE_CELL:
+    # #            image = pygame.image.load(mine_img, object, row)
+    # #            screen.visual_object_implementation(image)
+    #         elif (row, object) == flag_objects[0]:
+    # #            image = pygame.image.load(flag_img)
+    # #            screen.visual_object_implementation(image, object, row)
+    #         elif field_grid[row][object] == SOLDIER_UPPER and field_grid[row][object + 1] == SOLDIER_UPPER and field_grid[row + 3][object] == SOLDIER_LOWER:
+    # #            image = pygame.image.load(soldier_img)
+    # #            screen.visual_object_implementation(image, object, row)
+    #         else:
+    #             continue
+    pass
