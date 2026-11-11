@@ -45,9 +45,15 @@ MINE_CELL = 'X'
 FLAG_CELL = 'F'
 SOLDIER_UPPER = 'U'
 SOLDIER_LOWER = 'L'
+GRASS_CELL = 'G'
 
 # תמונות
 SOLDIER_IMG = "soldier.png"
 FLAG_IMG = "flag.png"
 GRASS_IMG = "grass.png"
 MINE_IMG = "mine.png"
+
+#לדשא
+GRASS_ROWS = 3
+GRASS_COLS = 3
+GRASS_COUNT = 20
