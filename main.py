@@ -3,12 +3,16 @@ import pygame
 import screen
 import consts
 
+flag_pic = screen.create_flag(consts.FLAG_IMG)
+grass_pic = screen.create_grass(consts.GRASS_IMG)
+soldier_pic = screen.create_grass(consts.SOLDIER_IMG)
+mine_pic = screen.create_mine(consts.MINE_IMG)
 state = {
     "is_window_open": True,
-    "flag_pic": screen.create_flag(consts.FLAG_IMG),
-    "grass_pic": screen.create_grass(consts.GRASS_IMG),
-    "soldier_pic": screen.create_grass(consts.SOLDIER_IMG),
-    "mine_pic": screen.create_mine(consts.MINE_IMG)
+    "flag_pic": flag_pic,
+    "grass_pic": grass_pic,
+    "soldier_pic": soldier_pic,
+    "mine_pic": mine_pic
 }
 
 def main():
@@ -21,7 +25,7 @@ def main():
         if not state["is_window_open"]:
             break
 
-        screen.draw_game(state)
+        screen.draw_game()
 
 
 
