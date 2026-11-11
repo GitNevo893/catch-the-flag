@@ -1,7 +1,35 @@
 import pygame
 import consts
-import math
+import game_field
 
 screen = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
+pygame.display.set_caption('Catch the flag! - pygame')
 
+def draw_game(): #game_state
+    screen.fill(consts.BACKGROUND_COLOR)
 
+    game_field.draw()
+
+    pygame.display.update()
+
+def create_flag(flag_img):
+    flag = pygame.image.load(flag_img)
+    sized_flag = pygame.transform.scale(
+        flag, (consts.FLAG_COLS, consts.FLAG_ROWS)
+    )
+def create_soldier(soldier_img):
+    soldier = pygame.image.load(soldier_img)
+    sized_soldier = pygame.transform.scale(
+        soldier, (consts.SOLDIER_COLS, consts.SOLDIER_ROWS)
+    )
+def create_grass(grass_img):
+    grass = pygame.image.load(grass_img)
+    sized_grass = pygame.transform.scale(
+        grass, (consts.GRASS_COLS, consts.GRASS_ROWS)
+    )
+
+def create_mine(mine_img):
+    mine = pygame.image.load(mine_img)
+    sized_mine = pygame.transform.scale(
+        mine, (consts.MINE_COLS, consts.MINE_ROWS)
+    )
