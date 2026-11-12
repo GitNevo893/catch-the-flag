@@ -4,6 +4,7 @@ import screen
 import consts
 import game_field
 import grass_field
+import time
 
 # flag_pic = screen.create_flag(consts.FLAG_IMG)
 # grass_pic = screen.create_grass(consts.GRASS_IMG)
@@ -20,9 +21,7 @@ state = {
 def main():
     pygame.init()
     game_field.create()
-
     grass_field.create_grass_field()
-    grass_field.draw_grass_field()
 
     while state["is_window_open"]:
         handle_user_events()
@@ -54,7 +53,7 @@ def handle_user_events():
             elif event.key == pygame.K_RETURN:
                 print("pressed ENTER")
                 show_mines()
-
+                time.sleep(1)
 def step_right():
     game_field.move_soldier(0, 1)
 
@@ -68,8 +67,7 @@ def step_down():
     game_field.move_soldier(1, 0)
 
 def show_mines():
+    game_field.mine_glimpse()
 
-    #TODO
-    pass
 
 main()
