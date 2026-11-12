@@ -173,9 +173,11 @@ def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה
                 flag_x = object * consts.CELL_SIZE
                 flag_y = row * consts.CELL_SIZE
                 screen.screen_display.blit(screen.create_flag(consts.FLAG_IMG), (flag_x, flag_y))
-            elif field_grid[row][object] == consts.SOLDIER_UPPER and field_grid[row][object + 1] == consts.SOLDIER_UPPER and field_grid[row + 3][object] == consts.SOLDIER_LOWER:
-                soldier_x = object * consts.CELL_SIZE
-                soldier_y = row * consts.CELL_SIZE
-                screen.screen_display.blit(screen.create_soldier(consts.SOLDIER_IMG), (soldier_x, soldier_y))
+            # elif field_grid[row][object] == consts.SOLDIER_UPPER and field_grid[row][object + 1] == consts.SOLDIER_UPPER and field_grid[row + 3][object] == consts.SOLDIER_LOWER:
+            elif row <= comsts.FARTHEST_ROW:
+                if field_grid[row][object] == consts.SOLDIER_UPPER and field_grid[row][object + 1] == consts.SOLDIER_UPPER and field_grid[row + 2][object] == consts.SOLDIER_UPPER:
+                    soldier_x = object * consts.CELL_SIZE
+                    soldier_y = row * consts.CELL_SIZE
+                    screen.screen_display.blit(screen.create_soldier(consts.SOLDIER_IMG), (soldier_x, soldier_y))
             else:
                 continue
