@@ -6,16 +6,8 @@ import game_field
 import grass_field
 import time
 
-# flag_pic = screen.create_flag(consts.FLAG_IMG)
-# grass_pic = screen.create_grass(consts.GRASS_IMG)
-# soldier_pic = screen.create_grass(consts.SOLDIER_IMG)
-# mine_pic = screen.create_mine(consts.MINE_IMG)
 state = {
-    "is_window_open": True,
-    # "flag_pic": flag_pic,
-    # "grass_pic": grass_pic,
-    # "soldier_pic": soldier_pic,
-    # "mine_pic": mine_pic
+    "is_window_open": True
 }
 
 def main():
@@ -27,6 +19,14 @@ def main():
         handle_user_events()
 
         if not state["is_window_open"]:
+            break
+        elif is_lose():
+            screen.draw_game_lose()
+            time.sleep(3)
+            break
+        elif is_win():
+            screen.draw_game_win()
+            time.sleep(3)
             break
 
         screen.draw_game()
@@ -54,20 +54,36 @@ def handle_user_events():
                 print("pressed ENTER")
                 show_mines()
                 time.sleep(1)
+
 def step_right():
     game_field.move_soldier(0, 1)
-
 def step_left():
     game_field.move_soldier(0, -1)
-
 def step_up():
     game_field.move_soldier(-1, 0)
-
 def step_down():
     game_field.move_soldier(1, 0)
 
 def show_mines():
     game_field.mine_glimpse()
+
+def is_lose():
+    upper_cells, lower_cells = game_field.get_soldier_cells()
+
+    for row, col in lower_cells:
+        for mine_row, mine_col in game_field.mines_positions:
+            if (mine_row <= row < mine_row + consts.MINE_ROWS and mine_col <= col < mine_col + consts.MINE_COLS):
+                return True
+    return False
+
+def is_win():
+    upper_cells, lower_cells = game_field.get_soldier_cells()
+    flag_cells = game_field.get_flag_cells()
+
+    for soldier_cell in upper_cells:
+        if soldier_cell in flag_cells:
+            return True
+    return False
 
 
 main()
