@@ -1,1 +1,15 @@
+import consts
 
+def get_soldier_crdts(mtrx):
+    soldier_upper_crdts = []
+    soldier_lower_crdts = []
+
+    for r, row in enumerate(mtrx):
+        for c in range(len(row)):
+
+            if mtrx[r][c] == consts.SOLDIER_UPPER:
+                soldier_upper_crdts.append((r , c))
+            elif mtrx[r][c] == consts.SOLDIER_LOWER:
+                soldier_lower_crdts.append((r , c))
+
+    return soldier_upper_crdts , soldier_lower_crdts
