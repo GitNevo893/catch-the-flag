@@ -8,10 +8,22 @@ pygame.display.set_caption('Catch the flag! - pygame')
 
 def draw_game(): #game_state
     screen_display.fill(consts.BACKGROUND_COLOR)
-    game_field.draw()
     grass_field.draw_grass_field()
+    game_field.draw()
+    pygame.display.update()
 
+def draw_game_lose(): #game_state
+    screen_display.fill(consts.BACKGROUND_COLOR)
+    grass_field.draw_grass_field()
+    game_field.draw()
+    screen_display.blit(create_lose(consts.YOU_LOSE_IMG), consts.LOSE_POSITION)
+    pygame.display.update()
 
+def draw_game_win(): #game_state
+    screen_display.fill(consts.BACKGROUND_COLOR)
+    grass_field.draw_grass_field()
+    game_field.draw()
+    screen_display.blit(create_win(consts.YOU_WIN_IMG), consts.LOSE_POSITION)
     pygame.display.update()
 
 def create_flag(flag_img):
@@ -31,6 +43,13 @@ def create_soldier(soldier_img):
     )
     return sized_soldier
 
+def create_soldier_night(soldier_night_img):
+    soldier_night = pygame.image.load(soldier_night_img)
+    sized_soldier_night = pygame.transform.scale(
+        soldier_night, (consts.SOLDIER_WIDTH, consts.SOLDIER_HEIGHT)
+    )
+    return sized_soldier_night
+
 def create_grass(grass_img):
     grass = pygame.image.load(grass_img)
     sized_grass = pygame.transform.scale(
@@ -44,4 +63,19 @@ def create_mine(mine_img):
         mine, (consts.MINE_WIDTH, consts.MINE_HEIGHT)
     )
     return sized_mine
+
+def create_lose(lose_img):
+    lose = pygame.image.load(lose_img)
+    sized_lose = pygame.transform.scale(
+        lose, (consts.LOSE_WIDTH, consts.LOSE_HEIGHT)
+    )
+    return sized_lose
+
+def create_win(win_img):
+    win = pygame.image.load(win_img).convert_alpha()
+    sized_win = pygame.transform.scale(
+        win, (consts.LOSE_WIDTH, consts.LOSE_HEIGHT)
+    )
+    return sized_win
+
 
