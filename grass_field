@@ -1,5 +1,8 @@
+# מודול זה מיועד כדי ליצור מטריצה נפרדת שבה נפרוש באופן רנדומלי שיחים.
+
 import consts
 import random
+import screen
 
 grass_field = []
 
@@ -42,3 +45,17 @@ def place_grass(board):
 def print_test_grid(mtrx):
     for i in mtrx:
         print('\t'.join(map(str, i)))
+
+
+def draw_grass_field():
+    grass_x = 0
+    grass_y = 0
+
+    for row in range(0, len(grass_field) - 2):
+        for object in range(0, len(grass_field[row]) - 1):
+            if grass_field[row][object] == consts.EMPTY_CELL:
+                continue
+            elif grass_field[row][object] == consts.GRASS_CELL:
+                grass_x = object * consts.CELL_SIZE
+                grass_y = row * consts.CELL_SIZE
+                screen.screen_display.blit(screen.create_grass(consts.GRASS_IMG), (grass_x, grass_y))
