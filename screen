@@ -1,14 +1,16 @@
 import pygame
 import consts
 import game_field
+import grass_field
 
 screen_display = pygame.display.set_mode((consts.WINDOW_WIDTH, consts.WINDOW_HEIGHT))
 pygame.display.set_caption('Catch the flag! - pygame')
 
 def draw_game(): #game_state
     screen_display.fill(consts.BACKGROUND_COLOR)
-
     game_field.draw()
+    grass_field.draw_grass_field()
+
 
     pygame.display.update()
 
@@ -29,7 +31,7 @@ def create_soldier(soldier_img):
     )
     return sized_soldier
 
-def create_grass(grass_img):              #צריך להיווצר רנדומלי *
+def create_grass(grass_img):
     grass = pygame.image.load(grass_img)
     sized_grass = pygame.transform.scale(
         grass, (consts.GRASS_WIDTH, consts.GRASS_HEIGHT)
