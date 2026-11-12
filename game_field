@@ -1,7 +1,9 @@
+import pygame
 import consts
 import random
 import screen
 import soldier
+
 
 field_grid = []
 mines_positions = []
@@ -166,18 +168,56 @@ def draw(): # מעבר על המטריצה כדי לקבוע איזו תמונה
         for object in range(0, len(field_grid[row]) - 1):
             if field_grid[row][object] == consts.EMPTY_CELL:
                 continue
-            # elif field_grid[row][object] == MINE_CELL and field_grid[row][object + 2] == MINE_CELL:
-            #    image = pygame.image.load(mine_img, object, row)
-            #    screen.visual_object_implementation(image)
             elif (row, object) == flag_objects[0]:
                 flag_x = object * consts.CELL_SIZE
                 flag_y = row * consts.CELL_SIZE
                 screen.screen_display.blit(screen.create_flag(consts.FLAG_IMG), (flag_x, flag_y))
-            # elif field_grid[row][object] == consts.SOLDIER_UPPER and field_grid[row][object + 1] == consts.SOLDIER_UPPER and field_grid[row + 3][object] == consts.SOLDIER_LOWER:
-            elif row <= comsts.FARTHEST_ROW:
+            elif row <= consts.FARTHEST_ROW:
                 if field_grid[row][object] == consts.SOLDIER_UPPER and field_grid[row][object + 1] == consts.SOLDIER_UPPER and field_grid[row + 2][object] == consts.SOLDIER_UPPER:
                     soldier_x = object * consts.CELL_SIZE
                     soldier_y = row * consts.CELL_SIZE
                     screen.screen_display.blit(screen.create_soldier(consts.SOLDIER_IMG), (soldier_x, soldier_y))
             else:
                 continue
+
+def mine_glimpse():
+    flag_y = 0
+    flag_x = 0
+    soldier_x = 0
+    soldier_y = 0
+    flag_objects = get_flag_cells()
+    screen.screen_display.fill(consts.NIGHT_MODE_COLOR)
+
+    for row in range(0, len(field_grid) - 1):
+        for object in range(0, len(field_grid[row]) - 1):
+            if object + 2 <= len(field_grid[row]) - 1:
+                if field_grid[row][object] == consts.MINE_CELL and field_grid[row][object + 2] == consts.MINE_CELL:
+                    mine_x = object * consts.CELL_SIZE
+                    mine_y = row * consts.CELL_SIZE
+                    screen.screen_display.blit(screen.create_mine(consts.MINE_IMG), (mine_x, mine_y))
+                elif (row, object) == flag_objects[0]:
+                    flag_x = object * consts.CELL_SIZE
+                    flag_y = row * consts.CELL_SIZE
+                    screen.screen_display.blit(screen.create_flag(consts.FLAG_IMG), (flag_x, flag_y))
+                elif row <= consts.FARTHEST_ROW:
+                    if field_grid[row][object] == consts.SOLDIER_UPPER and field_grid[row][
+                        object + 1] == consts.SOLDIER_UPPER and field_grid[row + 2][object] == consts.SOLDIER_UPPER:
+                        soldier_x = object * consts.CELL_SIZE
+                        soldier_y = row * consts.CELL_SIZE
+                        screen.screen_display.blit(screen.create_soldier(consts.SOLDIER_IMG), (soldier_x, soldier_y))
+            line_y = row * consts.CELL_SIZE
+            line_x = object * consts.CELL_SIZE
+            pygame.draw.line(
+                screen.screen_display,
+                consts.NIGHT_MODE_LINES_COLOR,
+                start_pos=(0, line_y),
+                end_pos=(consts.WINDOW_WIDTH, line_y),
+            )
+            pygame.draw.line(
+                screen.screen_display,
+                consts.NIGHT_MODE_LINES_COLOR,
+                start_pos=(line_x, 0),
+                end_pos=(line_x, consts.WINDOW_HEIGHT),
+            )
+
+    pygame.display.update()
