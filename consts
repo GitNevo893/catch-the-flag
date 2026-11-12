@@ -43,6 +43,13 @@ RUNNING_STATE = 1
 LOSE_STATE = 2
 WIN_STATE = 3
 
+#ניצחון והפסד
+LOSE_ROWS = 20
+LOSE_COLS = 30
+LOSE_HEIGHT = LOSE_ROWS * CELL_SIZE
+LOSE_WIDTH = LOSE_COLS * CELL_SIZE
+LOSE_POSITION = (10, 10)
+
 # לגריד
 EMPTY_CELL = '_'
 MINE_CELL = 'X'
@@ -53,8 +60,10 @@ GRASS_CELL = 'G'
 
 # תמונות
 SOLDIER_IMG = "soldier.png"
+SOLDIER_NIGHT_IMG = "soldier_night.png"
 FLAG_IMG = "flag.png"
 GRASS_IMG = "grass.png"
 MINE_IMG = "mine.png"
-
+YOU_LOSE_IMG = "you_lose.png"
+YOU_WIN_IMG = "you_win.png"
 
