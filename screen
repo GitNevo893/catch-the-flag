@@ -10,6 +10,9 @@ def draw_game(): #game_state
     screen_display.fill(consts.BACKGROUND_COLOR)
     grass_field.draw_grass_field()
     game_field.draw()
+    font = pygame.font.Font(None, 30)
+    start_text_surf = font.render("Welcome to the Flag game. \nHave Fun!", False, "#154485")
+    screen_display.blit(start_text_surf, (20, 20))
     pygame.display.update()
 
 def draw_game_lose(): #game_state
