@@ -188,8 +188,8 @@ def mine_glimpse():
     flag_objects = get_flag_cells()
     screen.screen_display.fill(consts.NIGHT_MODE_COLOR)
 
-    for row in range(0, len(field_grid) - 1):
-        for object in range(0, len(field_grid[row]) - 1):
+    for row in range(0, len(field_grid)):
+        for object in range(0, len(field_grid[row])):
             if object + 2 <= len(field_grid[row]) - 1:
                 if field_grid[row][object] == consts.MINE_CELL and field_grid[row][object + 2] == consts.MINE_CELL:
                     mine_x = object * consts.CELL_SIZE
